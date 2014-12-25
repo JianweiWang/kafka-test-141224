@@ -73,7 +73,7 @@ public class ProducerTest {
             } else {
                 age = Integer.toString(2014 - year);
             }
-            String idInfo = id + gender + age;
+            String idInfo = id + "\t" + gender + "\t" + age;
             msgId++;
             return idInfo;
 
@@ -82,10 +82,11 @@ public class ProducerTest {
     }
 
     public static void sendMsg(String msg) {
+        String zookeeperIp = "192.168.0.8";
         Properties props = new Properties();
-        props.put("zookeeper.connect", "127.0.0.1:2181");
+        props.put("zookeeper.connect", "192.168.0.8:2181");
         props.put("serializer.class", "kafka.serializer.StringEncoder");
-        props.put("metadata.broker.list","127.0.0.1:9092");
+        props.put("metadata.broker.list","192.168.0.8:9092");
 //        props.put("metadata.broker.list", "broker1:9092,broker2:9092 ");
 //        props.put("serializer.class", "kafka.serializer.StringEncoder");
 //        props.put("partitioner.class", "example.producer.SimplePartitioner");
@@ -174,9 +175,9 @@ public class ProducerTest {
 //            sleep(2000);
 //        }
        // sendSentence();
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10000000; i++) {
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(10L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
